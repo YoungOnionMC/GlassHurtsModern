@@ -48,7 +48,7 @@ public class DataGenerators {
                     set
             ));
             generator.addProvider(true, new GlassLootModifierProvider(packOutput));
-
+            generator.addProvider(true, new GlassHurtsRecipeProvider(packOutput));
         }
     }
 

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "glasshurts:glass_shard"
+    },
+    {
+      "item": "glasshurts:glass_shard"
+    },
+    {
+      "item": "glasshurts:glass_shard"
+    },
+    {
+      "item": "glasshurts:glass_shard"
+    },
+    {
+      "item": "glasshurts:glass_shard"
+    },
+    {
+      "item": "glasshurts:glass_shard"
+    },
+    {
+      "item": "glasshurts:glass_shard"
+    },
+    {
+      "item": "glasshurts:glass_shard"
+    },
+    {
+      "item": "glasshurts:glass_shard"
+    }
+  ],
+  "result": {
+    "item": "minecraft:glass"
+  }
+}

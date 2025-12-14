@@ -8,6 +8,8 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -42,9 +44,17 @@ public class GlassLootModifier extends LootModifier {
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         BlockState state = context.getParamOrNull(LootContextParams.BLOCK_STATE);
         ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
-        if(state != null && (state.is(Tags.Blocks.GLASS) || state.is(Tags.Blocks.GLASS_PANES)) && (tool == null || tool.isEmpty())) {
-            //generatedLoot.clear();
-            generatedLoot.add(new ItemStack(Items.GLASS_SHARD.get(), context.getRandom().nextInt(max - min) + min));
+        boolean hasSilk = false;
+        if (tool != null && !tool.isEmpty() && EnchantmentHelper.getTagEnchantmentLevel(Enchantments.SILK_TOUCH, tool) > 0) {
+            hasSilk = true;
+        }
+        if(state != null && (!hasSilk)){
+            if (state.is(Tags.Blocks.GLASS)) {
+                generatedLoot.add(new ItemStack(Items.GLASS_SHARD.get(), context.getRandom().nextInt(max * 2 - min) + min));
+            } else if (state.is(Tags.Blocks.GLASS_PANES)) {
+                generatedLoot.add(new ItemStack(Items.GLASS_SHARD.get(), context.getRandom().nextInt(max - min) + min));
+
+            }
         }
         return generatedLoot;
     }
