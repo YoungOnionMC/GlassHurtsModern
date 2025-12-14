@@ -31,7 +31,7 @@ import java.util.function.Supplier;
 
 import static com.youngonion.glasshurts.GlassHurts.MOD_ID;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
     @SubscribeEvent
@@ -47,6 +47,7 @@ public class DataGenerators {
                     .add(Registries.DAMAGE_TYPE, DamageSources::bootstrap),
                     set
             ));
+            generator.addProvider(true, new GlassLootModifierProvider(packOutput));
 
         }
     }

@@ -41,7 +41,8 @@ public class GlassLootModifier extends LootModifier {
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
         BlockState state = context.getParamOrNull(LootContextParams.BLOCK_STATE);
-        if(state != null && (state.is(Tags.Blocks.GLASS) || state.is(Tags.Blocks.GLASS_PANES)) && !context.hasParam(LootContextParams.TOOL)) {
+        ItemStack tool = context.getParamOrNull(LootContextParams.TOOL);
+        if(state != null && (state.is(Tags.Blocks.GLASS) || state.is(Tags.Blocks.GLASS_PANES)) && (tool == null || tool.isEmpty())) {
             //generatedLoot.clear();
             generatedLoot.add(new ItemStack(Items.GLASS_SHARD.get(), context.getRandom().nextInt(max - min) + min));
         }

@@ -1,0 +1,6 @@
+{
+  "type": "glasshurts:glass_loot",
+  "conditions": [],
+  "max": 3,
+  "min": 1
+}
