@@ -29,8 +29,6 @@ public class GlassHurtsRecipeProvider extends RecipeProvider {
                 .define('i', Items.IRON_INGOT)
                 .save(provider);
 
-        SmeltingRecipe
-
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, Items.GLASS)
                 .unlockedBy(getHasName(GLASS_SHARD.get()), has(GLASS_SHARD.get()))
                 .requires(GLASS_SHARD.get(), 9)
