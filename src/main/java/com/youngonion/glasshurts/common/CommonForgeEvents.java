@@ -1,0 +1,89 @@
+package com.youngonion.glasshurts.common;
+
+import com.youngonion.glasshurts.items.Items;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class CommonForgeEvents {
+
+    public static DamageSource glass_damage(Level level, ResourceKey<DamageType> key) {
+        return new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(key));
+    }
+
+    @SubscribeEvent
+    public static void breakGlassEvent(BlockEvent.BreakEvent event) {
+        ItemStack mainStack = event.getPlayer().getMainHandItem();
+
+
+
+        if(event.getState().is(Tags.Blocks.GLASS)) {
+            if(mainStack.isCorrectToolForDrops(event.getState()) || EnchantmentHelper.hasSilkTouch(mainStack)) {
+                return;
+            }
+            var player = event.getPlayer();
+            if(player instanceof ServerPlayer serverPlayer) {
+                if(canDamage(serverPlayer)) {
+                    serverPlayer.hurt(glass_damage(serverPlayer.level(), GlassDamageType.GLASS_BREAK), 2.0f);
+                    serverPlayer.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 90, 3));
+                }
+            }
+
+        }
+        if(event.getState().is(Tags.Blocks.GLASS_PANES)) {
+            if(mainStack.isCorrectToolForDrops(event.getState()) || EnchantmentHelper.hasSilkTouch(mainStack)) {
+                return;
+            }
+            var player = event.getPlayer();
+            if(player instanceof ServerPlayer serverPlayer) {
+                if(canDamage(serverPlayer)) {
+                    serverPlayer.hurt(glass_damage(serverPlayer.level(), GlassDamageType.GLASS_BREAK), 1.0f);
+                    serverPlayer.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 90, 3));
+                }
+            }
+
+        }
+    }
+
+    private static boolean canDamage(ServerPlayer player) {
+
+        ItemStack mainItem = player.getMainHandItem();
+        ItemStack offhandItem = player.getOffhandItem();
+
+        boolean damage = true;
+
+        if(mainItem.is(Items.LEATHER_GLOVE.get())) {
+            if(!player.getCooldowns().isOnCooldown(mainItem.getItem())) {
+                player.getCooldowns().addCooldown(mainItem.getItem(), 35);
+                damage = false;
+            }
+            mainItem.hurtAndBreak(1, player, (player1) -> {});
+            return damage;
+        }
+
+        if (offhandItem.is(Items.LEATHER_GLOVE.get())) {
+            if(!player.getCooldowns().isOnCooldown(offhandItem.getItem())) {
+                player.getCooldowns().addCooldown(offhandItem.getItem(), 35);
+                damage = false;
+            }
+            offhandItem.hurtAndBreak(1, player, (player1) -> {});
+        }
+        return damage;
+    }
+
+}
