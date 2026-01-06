@@ -1,6 +1,5 @@
 package com.youngonion.glasshurts.common;
 
-import com.youngonion.glasshurts.items.Items;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -15,12 +14,9 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.LootTableLoadEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -130,7 +126,7 @@ public class CommonForgeEvents {
 
         boolean damage = true;
 
-        if(mainItem.is(Items.LEATHER_GLOVE.get())) {
+        if(mainItem.is(GlassHurtsItems.LEATHER_GLOVE.get())) {
             if(!player.getCooldowns().isOnCooldown(mainItem.getItem())) {
                 player.getCooldowns().addCooldown(mainItem.getItem(), 35);
                 damage = false;
@@ -139,7 +135,7 @@ public class CommonForgeEvents {
             return damage;
         }
 
-        if (offhandItem.is(Items.LEATHER_GLOVE.get())) {
+        if (offhandItem.is(GlassHurtsItems.LEATHER_GLOVE.get())) {
             if(!player.getCooldowns().isOnCooldown(offhandItem.getItem())) {
                 player.getCooldowns().addCooldown(offhandItem.getItem(), 35);
                 damage = false;
