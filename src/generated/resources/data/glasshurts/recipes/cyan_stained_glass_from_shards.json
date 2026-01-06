@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    },
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    },
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    },
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    },
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    },
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    },
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    },
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    },
+    {
+      "item": "glasshurts:glass_shard_cyan"
+    }
+  ],
+  "result": {
+    "item": "minecraft:cyan_stained_glass"
+  }
+}

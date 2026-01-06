@@ -1,33 +1,23 @@
 package com.youngonion.glasshurts.data;
 
-import com.google.common.base.Suppliers;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.youngonion.glasshurts.GlassHurts;
 import com.youngonion.glasshurts.common.DamageSources;
-import com.youngonion.glasshurts.items.Items;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.core.RegistrySetBuilder;
+import com.youngonion.glasshurts.common.GlassHurtsItems;
+import com.youngonion.glasshurts.common.GlassHurtsTags;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.GlobalLootModifierProvider;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
-import java.util.function.Supplier;
 
 import static com.youngonion.glasshurts.GlassHurts.MOD_ID;
 
@@ -49,7 +39,37 @@ public class DataGenerators {
             ));
             generator.addProvider(true, new GlassLootModifierProvider(packOutput));
             generator.addProvider(true, new GlassHurtsRecipeProvider(packOutput));
+            generator.addProvider(true, new GlassHurtsItemTags(packOutput, registries, fileHelper));
+        }
+        if (event.includeClient()) {
+            generator.addProvider(true, new GlassHurtsItemModelProvider(packOutput, fileHelper));
         }
     }
 
+    // Item Tag Provider
+    private static class GlassHurtsItemTags extends ItemTagsProvider {
+        public GlassHurtsItemTags(PackOutput output,
+                                  java.util.concurrent.CompletableFuture<HolderLookup.Provider> registries,
+                                  ExistingFileHelper existingFileHelper) {
+            super(output,
+                  registries,
+                  java.util.concurrent.CompletableFuture.completedFuture(TagsProvider.TagLookup.empty()),
+                  MOD_ID,
+                  existingFileHelper);
+        }
+
+        @Override
+        protected void addTags(HolderLookup.@NotNull Provider provider) {
+            var b = tag(GlassHurtsTags.Items.GLASS_SHARDS);
+            b.add(GlassHurtsItems.GLASS_SHARD.get());
+            for (var entry : GlassHurtsItems.COLORED_GLASS_SHARDS.values()) {
+                b.add(entry.get());
+            }
+        }
+
+        @Override
+        public @NotNull String getName() {
+            return "GlassHurts Item Tags";
+        }
+    }
 }
