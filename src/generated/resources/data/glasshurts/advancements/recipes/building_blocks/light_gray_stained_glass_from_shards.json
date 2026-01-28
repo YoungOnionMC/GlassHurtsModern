@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_glass_shard_light_gray": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "glasshurts:glass_shard_light_gray"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "glasshurts:light_gray_stained_glass_from_shards"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_glass_shard_light_gray",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "glasshurts:light_gray_stained_glass_from_shards"
+    ]
+  },
+  "sends_telemetry_event": false
+}

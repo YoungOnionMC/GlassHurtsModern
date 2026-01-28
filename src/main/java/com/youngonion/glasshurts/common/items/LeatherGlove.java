@@ -1,4 +1,4 @@
-package com.youngonion.glasshurts.items;
+package com.youngonion.glasshurts.common.items;
 
 import net.minecraft.world.item.Item;
 

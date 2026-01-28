@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "glasshurts:glass_shard_blue"
+    },
+    {
+      "item": "glasshurts:glass_shard_blue"
+    },
+    {
+      "item": "glasshurts:glass_shard_blue"
+    },
+    {
+      "item": "glasshurts:glass_shard_blue"
+    },
+    {
+      "item": "glasshurts:glass_shard_blue"
+    },
+    {
+      "item": "glasshurts:glass_shard_blue"
+    },
+    {
+      "item": "glasshurts:glass_shard_blue"
+    },
+    {
+      "item": "glasshurts:glass_shard_blue"
+    },
+    {
+      "item": "glasshurts:glass_shard_blue"
+    }
+  ],
+  "result": {
+    "item": "minecraft:blue_stained_glass"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "glasshurts:glass_shard_pink"
+    },
+    {
+      "item": "glasshurts:glass_shard_pink"
+    },
+    {
+      "item": "glasshurts:glass_shard_pink"
+    },
+    {
+      "item": "glasshurts:glass_shard_pink"
+    },
+    {
+      "item": "glasshurts:glass_shard_pink"
+    },
+    {
+      "item": "glasshurts:glass_shard_pink"
+    },
+    {
+      "item": "glasshurts:glass_shard_pink"
+    },
+    {
+      "item": "glasshurts:glass_shard_pink"
+    },
+    {
+      "item": "glasshurts:glass_shard_pink"
+    }
+  ],
+  "result": {
+    "item": "minecraft:pink_stained_glass"
+  }
+}

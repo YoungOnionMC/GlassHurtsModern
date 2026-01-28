@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_glass_shard": {
+    "has_glass_shard_purple": {
       "conditions": {
         "items": [
           {
             "items": [
-              "glasshurts:glass_shard"
+              "glasshurts:glass_shard_purple"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:glass"
+        "recipe": "glasshurts:purple_stained_glass_from_shards"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_glass_shard",
+      "has_glass_shard_purple",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:glass"
+      "glasshurts:purple_stained_glass_from_shards"
     ]
   },
   "sends_telemetry_event": false
